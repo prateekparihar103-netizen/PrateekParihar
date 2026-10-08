@@ -1,0 +1,125 @@
+/*
+ * Global styles & design tokens (Tailwind CSS v4).
+ *
+ * Design system (from UI/UX Pro Max): monochrome zinc base so the work
+ * leads, with one accent per professional pillar:
+ *   scm = amber (supply chain), esg = emerald (sustainability), ai = violet.
+ * Accents are darker in light mode and brighter in dark mode so text in
+ * either theme keeps >= 4.5:1 contrast.
+ */
+@import 'tailwindcss';
+
+/* Class-based dark mode: <html class="dark"> is toggled by ThemeProvider. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Newsreader', ui-serif, Georgia, serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+}
+
+/* Raw palette — light theme (default). */
+:root {
+  --bg: #fafaf7;
+  --surface: #ffffff;
+  --surface-2: #f4f4f0;
+  --ink: #09090b;
+  --muted: #52525b;
+  --line: #e4e4e7;
+  --scm: #b45309;
+  --esg: #047857;
+  --ai: #6d28d9;
+  color-scheme: light;
+}
+
+/* Raw palette — dark theme. */
+.dark {
+  --bg: #0b0b0d;
+  --surface: #131316;
+  --surface-2: #1b1b20;
+  --ink: #fafafa;
+  --muted: #a1a1aa;
+  --line: #2a2a30;
+  --scm: #fbbf24;
+  --esg: #34d399;
+  --ai: #a78bfa;
+  color-scheme: dark;
+}
+
+/* Expose the palette as Tailwind colours: bg-bg, text-ink, border-line, text-scm … */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-scm: var(--scm);
+  --color-esg: var(--esg);
+  --color-ai: var(--ai);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-bg text-ink font-sans antialiased;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  ::selection {
+    background: color-mix(in oklab, var(--ai) 30%, transparent);
+  }
+  /* One consistent, visible keyboard focus ring everywhere. */
+  :focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 3px;
+    border-radius: 8px;
+  }
+}
+
+@layer utilities {
+  /* Faint blueprint grid used behind hero and section headers. */
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, var(--line) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--line) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+  /* Fades the grid out towards the edges. */
+  .mask-radial {
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 30%, transparent 75%);
+  }
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Slow ambient drift for the hero colour fields. */
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(3%, -4%, 0) scale(1.08);
+  }
+}
+.animate-drift {
+  animation: drift 18s ease-in-out infinite;
+}
+
+/* Respect users who ask for less motion. Framer Motion handles its own via MotionConfig. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

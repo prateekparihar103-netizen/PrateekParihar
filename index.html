@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prateek Parihar — Supply Chain & Enterprise AI Consultant</title>
+    <meta
+      name="description"
+      content="Prateek Parihar — Functional Consultant at Wipro working across Oracle Fusion SCM, Dynamics 365 F&O, ESG frameworks and Generative AI agents. IIM Mumbai MBA."
+    />
+    <meta property="og:title" content="Prateek Parihar — Supply Chain & Enterprise AI" />
+    <meta property="og:description" content="Enterprise supply chain transformation, sustainability frameworks and GenAI engineering." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="photo.jpg" />
+    <meta name="theme-color" content="#FAFAF7" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0B0B0D" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+
+    <!-- Fonts: Newsreader (editorial display), Space Grotesk (UI/body), JetBrains Mono (labels) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    />
+
+    <!-- Apply the saved/system theme before first paint to avoid a light/dark flash. -->
+    <script>
+      ;(function () {
+        try {
+          var saved = localStorage.getItem('theme')
+          var dark = saved ? saved === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches
+          if (dark) document.documentElement.classList.add('dark')
+        } catch (e) {}
+      })()
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript>This portfolio needs JavaScript enabled.</noscript>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
